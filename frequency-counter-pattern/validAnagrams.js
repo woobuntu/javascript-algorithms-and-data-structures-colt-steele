@@ -1,7 +1,19 @@
-const sortString = (str) => str.split("").sort().join("");
+const validAnagram = (former, latter) => {
+  if (former.length !== latter.length) return false;
 
-const validAnagram = (former, latter) =>
-  sortString(former) == sortString(latter) ? true : false;
+  const hash = {};
+
+  for (const char of former)
+    hash[char] = hash.hasOwnProperty(char) ? hash[char] + 1 : 1;
+
+  for (const char of latter) {
+    if (hash[char]) hash[char]--;
+    // hash[char]이 0이면 false값임을 이용
+    else return false;
+  }
+
+  return true;
+};
 
 // const result =
 // validAnagram("", ""); // true
